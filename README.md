@@ -7,7 +7,7 @@
 ###### i.e is one gap now in app
 ###### 6.We can avoid unwanted api call if user data is present in store
 
-###### Instructions to execute code and run tests.
+# Instructions to execute code and run tests.
 ###### Step 1-Download Nodejs and install it on your machine
 ###### Step 2-Open mtn-login-app Project on your machine and run npm install -g @angular/cli
 ###### Step 3-run command npm install in directory for project mtn-login-app
