@@ -11,13 +11,21 @@ import { environment } from './../../environments/environment';
     providedIn: 'root',
   })
 export class AuthService {
+  private BASE_URL = 'http://localhost:1337';
     timeoutInterval: any;
     constructor(private http:HttpClient, private store:Store<AppState>){}
 
-    login(email:string, password:string):Observable<AuthResponseData>{
-    return this.http.post<AuthResponseData>(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,
-        {email,password,returnSecureToken:true }
+//     login(email:string, password:string):Observable<AuthResponseData>{
+//     return this.http.post<AuthResponseData>(
+//         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,
+//         {email,password,returnSecureToken:true }
+//     );
+// }
+
+login(email:string, password:string): Observable<AuthResponseData>{
+  const url = `${this.BASE_URL}/home`;
+  return this.http.post<AuthResponseData>( url,
+    {email,password,returnSecureToken:true}
     );
 }
 formatUser(data: AuthResponseData) {
@@ -25,7 +33,9 @@ formatUser(data: AuthResponseData) {
       new Date().getTime() + +data.expiresIn * 1000
     );
     const user = new User(
+      data.status,
       data.email,
+      data.password,
       data.idToken,
       data.localId,
       expirationDate
@@ -36,7 +46,7 @@ formatUser(data: AuthResponseData) {
   setUserInLocalStorage(user: User) {
     localStorage.setItem('userData', JSON.stringify(user));
 
-    this.runTimeoutInterval(user);
+    //this.runTimeoutInterval(user);
   }
 
   runTimeoutInterval(user: User) {
@@ -50,5 +60,11 @@ formatUser(data: AuthResponseData) {
     });
     //}, timeInterval);
   }
-
+  logout() {
+    localStorage.removeItem('userData');
+    if (this.timeoutInterval) {
+      clearTimeout(this.timeoutInterval);
+      this.timeoutInterval = null;
+    }
+  }
 }

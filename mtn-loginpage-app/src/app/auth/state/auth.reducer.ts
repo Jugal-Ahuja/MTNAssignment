@@ -1,4 +1,4 @@
-import { loginSuccess } from './auth.action'
+import { loginSuccess, logOut } from './auth.action'
 import { createReducer,on, State } from '@ngrx/store';
 import { initialState } from './auth.state'
 import { Action } from 'rxjs/internal/scheduler/Action';
@@ -11,6 +11,13 @@ const _authReducer = createReducer(
           user: action.user,
         };
       }),
+
+      on(logOut, (state:any) => {
+        return {
+          ...state,
+          user:null,
+        };
+      })
 
 );
 

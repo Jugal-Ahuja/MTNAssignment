@@ -1,9 +1,11 @@
 export class User {
     constructor(
-      private email: string,
-      private token: string,
-      private localId: string,
-      private expirationDate: Date
+      public status:string,
+      public email: string,
+      public password: string,
+       public token: string,
+       public localId: string,
+       public expirationDate: Date
     ) {}
   
     get expireDate() {

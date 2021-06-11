@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid" >
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <img src="https://seeklogo.com/images/M/MTN-logo-459AAF9482-seeklogo.com.png" style="width: 50px;">
+      <ul class="navbar-nav" >
+        <li class="nav-item" *ngIf="isAuthenticated | async">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="#"
+              [routerLink]="['/home']"
+              aria-activedescendant="">Home</a
+            >
+           </li>
+          
+        <li class="nav-item" *ngIf="isAuthenticated | async" style="padding-left: 1050px;">
+          <a class="nav-link" href="#" (click)="onLogout($event)" style="color: black;">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

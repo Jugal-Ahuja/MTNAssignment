@@ -13,11 +13,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
